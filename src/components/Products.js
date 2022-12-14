@@ -14,6 +14,8 @@ function Products() {
     }, []);
     console.log(products)
 
+
+
     function addProductToCart(id) {
         const result = [];
         for (let product of products) {
@@ -33,9 +35,17 @@ function Products() {
     }
 
 
+    function changeCount(id, newCount) {
+        const result = products.map(product => ({ ...product, count: product.id === id ? newCount : product.count }));
+        setProducts(result);
+    }
+
 
     return <div className={'row p-4'}>
+
+        <h1 className={'pb-4 col-12'}>Products</h1>
         <Cart
+            changeCount={changeCount}
             removeProductFromCart={removeProductFromCart}
             products={products.filter(product => product.addedToCart)}
         />
